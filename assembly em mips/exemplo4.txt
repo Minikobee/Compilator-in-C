@@ -1,0 +1,6 @@
+int ola(int n) {
+    int n;
+    n=0;
+    if(n<0)
+    n=1+2;
+}
