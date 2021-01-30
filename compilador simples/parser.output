@@ -1,0 +1,1733 @@
+Terminais não usados na gramática
+
+    SS
+    ASPAS
+    PELICAS
+    ECOM
+
+
+Estado 13 conflitos: 11 troca/redução
+Estado 96 conflitos: 1 troca/redução
+
+
+Gramática
+
+    0 $accept: program $end
+
+    1 program: cmdList
+
+    2 expr: INT
+    3     | VAR
+    4     | expr PLUS expr
+    5     | expr SUB expr
+    6     | expr DIV expr
+    7     | expr MULT expr
+    8     | expr MOD expr
+    9     | PARENTESE1 expr PARENTESE2
+
+   10 boolean: expr GT expr
+   11        | expr GTEQ expr
+   12        | expr LT expr
+   13        | expr LTEQ expr
+   14        | expr EQUAL expr
+   15        | expr NOT_EQUAL expr
+   16        | TRUE
+   17        | FALSE
+   18        | boolean AND boolean
+   19        | boolean OR boolean
+
+   20 comand: IF_CMD PARENTESE1 boolean PARENTESE2 cmdList
+   21       | IF_CMD PARENTESE1 boolean PARENTESE2 cmdList ELSE_CMD cmdList
+   22       | INT_CMD VAR IGUAL expr PVIRGULA
+   23       | VAR IGUAL expr PVIRGULA
+   24       | INT_CMD VAR PVIRGULA
+   25       | WHILE_CMD PARENTESE1 boolean PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   26       | PRINT_INT_CMD PARENTESE1 VAR PARENTESE2 PVIRGULA
+   27       | PRINT_INT_CMD PARENTESE1 VAR VIRGULA VAR PARENTESE2 PVIRGULA
+   28       | VAR IGUAL SCAN_INT_CMD PARENTESE1 PARENTESE2 PVIRGULA
+   29       | INT_CMD MAIN PARENTESE1 PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   30       | BOOL VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   31       | INT_CMD VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   32       | RETURN TRUE PVIRGULA
+   33       | RETURN FALSE PVIRGULA
+   34       | RETURN expr PVIRGULA
+   35       | PRINT_STR_CMD PARENTESE1 STRING_CMD PARENTESE2 PVIRGULA
+   36       | CONTINUE_CMD PVIRGULA
+   37       | BREAK_CMD PVIRGULA
+   38       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   40       | FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+   42 cmdList: comand
+   43        | comand cmdList
+
+
+Terminais, com regras onde aparecem
+
+    $end (0) 0
+    error (256)
+    INT <intValue> (258) 2
+    BOOL (259) 30
+    VAR <charValue> (260) 3 22 23 24 26 27 28 30 31 38 39 40 41
+    STRING_CMD <charValue> (261) 35
+    PLUS (262) 4
+    PLUSS (263) 38 40
+    SUB (264) 5
+    SUBB (265) 39 41
+    DIV (266) 6
+    MULT (267) 7
+    MOD (268) 8
+    IGUAL (269) 22 23 28 38 39 40 41
+    GT (270) 10
+    GTEQ (271) 11
+    LT (272) 12
+    LTEQ (273) 13
+    EQUAL (274) 14
+    NOT_EQUAL (275) 15
+    TRUE (276) 16 32
+    FALSE (277) 17 33
+    AND (278) 18
+    OR (279) 19
+    SS (280)
+    RETURN (281) 32 33 34
+    IF_CMD (282) 20 21
+    ELSE_CMD (283) 21
+    INT_CMD (284) 22 24 29 30 31 38 39
+    WHILE_CMD (285) 25
+    FOR_CMD (286) 38 39 40 41
+    PRINT_INT_CMD (287) 26 27
+    SCAN_INT_CMD (288) 28
+    PRINT_STR_CMD (289) 35
+    CONTINUE_CMD (290) 36
+    BREAK_CMD (291) 37
+    MAIN (292) 29
+    CHAVETA1 (293) 25 29 30 31 38 39 40 41
+    CHAVETA2 (294) 25 29 30 31 38 39 40 41
+    PARENTESE1 (295) 9 20 21 25 26 27 28 29 30 31 35 38 39 40 41
+    PARENTESE2 (296) 9 20 21 25 26 27 28 29 30 31 35 38 39 40 41
+    PVIRGULA (297) 22 23 24 26 27 28 32 33 34 35 36 37 38 39 40 41
+    VIRGULA (298) 27
+    ASPAS (299)
+    PELICAS (300)
+    ECOM (301)
+
+
+Não terminais, com regras onde aparecem
+
+    $accept (47)
+        à esquerda: 0
+    program (48)
+        à esquerda: 1
+        à direita: 0
+    expr <exprValue> (49)
+        à esquerda: 2 3 4 5 6 7 8 9
+        à direita: 4 5 6 7 8 9 10 11 12 13 14 15 22 23 34 38 39 40 41
+    boolean <boolValue> (50)
+        à esquerda: 10 11 12 13 14 15 16 17 18 19
+        à direita: 18 19 20 21 25 38 39 40 41
+    comand <cmdValue> (51)
+        à esquerda: 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41
+        à direita: 42 43
+    cmdList <cmdListValue> (52)
+        à esquerda: 42 43
+        à direita: 1 20 21 25 29 30 31 38 39 40 41 43
+
+
+Estado 0
+
+    0 $accept: . program $end
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    program  vai para estado 12
+    comand   vai para estado 13
+    cmdList  vai para estado 14
+
+
+Estado 1
+
+   30 comand: BOOL . VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR  troca e vai para estado 15
+
+
+Estado 2
+
+   23 comand: VAR . IGUAL expr PVIRGULA
+   28       | VAR . IGUAL SCAN_INT_CMD PARENTESE1 PARENTESE2 PVIRGULA
+
+    IGUAL  troca e vai para estado 16
+
+
+Estado 3
+
+   32 comand: RETURN . TRUE PVIRGULA
+   33       | RETURN . FALSE PVIRGULA
+   34       | RETURN . expr PVIRGULA
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 19
+    FALSE       troca e vai para estado 20
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 22
+
+
+Estado 4
+
+   20 comand: IF_CMD . PARENTESE1 boolean PARENTESE2 cmdList
+   21       | IF_CMD . PARENTESE1 boolean PARENTESE2 cmdList ELSE_CMD cmdList
+
+    PARENTESE1  troca e vai para estado 23
+
+
+Estado 5
+
+   22 comand: INT_CMD . VAR IGUAL expr PVIRGULA
+   24       | INT_CMD . VAR PVIRGULA
+   29       | INT_CMD . MAIN PARENTESE1 PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   31       | INT_CMD . VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR   troca e vai para estado 24
+    MAIN  troca e vai para estado 25
+
+
+Estado 6
+
+   25 comand: WHILE_CMD . PARENTESE1 boolean PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE1  troca e vai para estado 26
+
+
+Estado 7
+
+   38 comand: FOR_CMD . PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD . PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   40       | FOR_CMD . PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD . PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE1  troca e vai para estado 27
+
+
+Estado 8
+
+   26 comand: PRINT_INT_CMD . PARENTESE1 VAR PARENTESE2 PVIRGULA
+   27       | PRINT_INT_CMD . PARENTESE1 VAR VIRGULA VAR PARENTESE2 PVIRGULA
+
+    PARENTESE1  troca e vai para estado 28
+
+
+Estado 9
+
+   35 comand: PRINT_STR_CMD . PARENTESE1 STRING_CMD PARENTESE2 PVIRGULA
+
+    PARENTESE1  troca e vai para estado 29
+
+
+Estado 10
+
+   36 comand: CONTINUE_CMD . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 30
+
+
+Estado 11
+
+   37 comand: BREAK_CMD . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 31
+
+
+Estado 12
+
+    0 $accept: program . $end
+
+    $end  troca e vai para estado 32
+
+
+Estado 13
+
+   42 cmdList: comand .
+   43        | comand . cmdList
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    BOOL           [redução com regra 42 (cmdList)]
+    VAR            [redução com regra 42 (cmdList)]
+    RETURN         [redução com regra 42 (cmdList)]
+    IF_CMD         [redução com regra 42 (cmdList)]
+    INT_CMD        [redução com regra 42 (cmdList)]
+    WHILE_CMD      [redução com regra 42 (cmdList)]
+    FOR_CMD        [redução com regra 42 (cmdList)]
+    PRINT_INT_CMD  [redução com regra 42 (cmdList)]
+    PRINT_STR_CMD  [redução com regra 42 (cmdList)]
+    CONTINUE_CMD   [redução com regra 42 (cmdList)]
+    BREAK_CMD      [redução com regra 42 (cmdList)]
+    $default       redução com regra 42 (cmdList)
+
+    comand   vai para estado 13
+    cmdList  vai para estado 33
+
+
+Estado 14
+
+    1 program: cmdList .
+
+    $default  redução com regra 1 (program)
+
+
+Estado 15
+
+   30 comand: BOOL VAR . PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE1  troca e vai para estado 34
+
+
+Estado 16
+
+   23 comand: VAR IGUAL . expr PVIRGULA
+   28       | VAR IGUAL . SCAN_INT_CMD PARENTESE1 PARENTESE2 PVIRGULA
+
+    INT           troca e vai para estado 17
+    VAR           troca e vai para estado 18
+    SCAN_INT_CMD  troca e vai para estado 35
+    PARENTESE1    troca e vai para estado 21
+
+    expr  vai para estado 36
+
+
+Estado 17
+
+    2 expr: INT .
+
+    $default  redução com regra 2 (expr)
+
+
+Estado 18
+
+    3 expr: VAR .
+
+    $default  redução com regra 3 (expr)
+
+
+Estado 19
+
+   32 comand: RETURN TRUE . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 37
+
+
+Estado 20
+
+   33 comand: RETURN FALSE . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 38
+
+
+Estado 21
+
+    9 expr: PARENTESE1 . expr PARENTESE2
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 39
+
+
+Estado 22
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   34 comand: RETURN expr . PVIRGULA
+
+    PLUS      troca e vai para estado 40
+    SUB       troca e vai para estado 41
+    DIV       troca e vai para estado 42
+    MULT      troca e vai para estado 43
+    MOD       troca e vai para estado 44
+    PVIRGULA  troca e vai para estado 45
+
+
+Estado 23
+
+   20 comand: IF_CMD PARENTESE1 . boolean PARENTESE2 cmdList
+   21       | IF_CMD PARENTESE1 . boolean PARENTESE2 cmdList ELSE_CMD cmdList
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 46
+    FALSE       troca e vai para estado 47
+    PARENTESE1  troca e vai para estado 21
+
+    expr     vai para estado 48
+    boolean  vai para estado 49
+
+
+Estado 24
+
+   22 comand: INT_CMD VAR . IGUAL expr PVIRGULA
+   24       | INT_CMD VAR . PVIRGULA
+   31       | INT_CMD VAR . PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    IGUAL       troca e vai para estado 50
+    PARENTESE1  troca e vai para estado 51
+    PVIRGULA    troca e vai para estado 52
+
+
+Estado 25
+
+   29 comand: INT_CMD MAIN . PARENTESE1 PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE1  troca e vai para estado 53
+
+
+Estado 26
+
+   25 comand: WHILE_CMD PARENTESE1 . boolean PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 46
+    FALSE       troca e vai para estado 47
+    PARENTESE1  troca e vai para estado 21
+
+    expr     vai para estado 48
+    boolean  vai para estado 54
+
+
+Estado 27
+
+   38 comand: FOR_CMD PARENTESE1 . INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 . INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   40       | FOR_CMD PARENTESE1 . VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 . VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR      troca e vai para estado 55
+    INT_CMD  troca e vai para estado 56
+
+
+Estado 28
+
+   26 comand: PRINT_INT_CMD PARENTESE1 . VAR PARENTESE2 PVIRGULA
+   27       | PRINT_INT_CMD PARENTESE1 . VAR VIRGULA VAR PARENTESE2 PVIRGULA
+
+    VAR  troca e vai para estado 57
+
+
+Estado 29
+
+   35 comand: PRINT_STR_CMD PARENTESE1 . STRING_CMD PARENTESE2 PVIRGULA
+
+    STRING_CMD  troca e vai para estado 58
+
+
+Estado 30
+
+   36 comand: CONTINUE_CMD PVIRGULA .
+
+    $default  redução com regra 36 (comand)
+
+
+Estado 31
+
+   37 comand: BREAK_CMD PVIRGULA .
+
+    $default  redução com regra 37 (comand)
+
+
+Estado 32
+
+    0 $accept: program $end .
+
+    $default  aceitar
+
+
+Estado 33
+
+   43 cmdList: comand cmdList .
+
+    $default  redução com regra 43 (cmdList)
+
+
+Estado 34
+
+   30 comand: BOOL VAR PARENTESE1 . INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT_CMD  troca e vai para estado 59
+
+
+Estado 35
+
+   28 comand: VAR IGUAL SCAN_INT_CMD . PARENTESE1 PARENTESE2 PVIRGULA
+
+    PARENTESE1  troca e vai para estado 60
+
+
+Estado 36
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   23 comand: VAR IGUAL expr . PVIRGULA
+
+    PLUS      troca e vai para estado 40
+    SUB       troca e vai para estado 41
+    DIV       troca e vai para estado 42
+    MULT      troca e vai para estado 43
+    MOD       troca e vai para estado 44
+    PVIRGULA  troca e vai para estado 61
+
+
+Estado 37
+
+   32 comand: RETURN TRUE PVIRGULA .
+
+    $default  redução com regra 32 (comand)
+
+
+Estado 38
+
+   33 comand: RETURN FALSE PVIRGULA .
+
+    $default  redução com regra 33 (comand)
+
+
+Estado 39
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+    9     | PARENTESE1 expr . PARENTESE2
+
+    PLUS        troca e vai para estado 40
+    SUB         troca e vai para estado 41
+    DIV         troca e vai para estado 42
+    MULT        troca e vai para estado 43
+    MOD         troca e vai para estado 44
+    PARENTESE2  troca e vai para estado 62
+
+
+Estado 40
+
+    4 expr: expr PLUS . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 63
+
+
+Estado 41
+
+    5 expr: expr SUB . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 64
+
+
+Estado 42
+
+    6 expr: expr DIV . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 65
+
+
+Estado 43
+
+    7 expr: expr MULT . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 66
+
+
+Estado 44
+
+    8 expr: expr MOD . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 67
+
+
+Estado 45
+
+   34 comand: RETURN expr PVIRGULA .
+
+    $default  redução com regra 34 (comand)
+
+
+Estado 46
+
+   16 boolean: TRUE .
+
+    $default  redução com regra 16 (boolean)
+
+
+Estado 47
+
+   17 boolean: FALSE .
+
+    $default  redução com regra 17 (boolean)
+
+
+Estado 48
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   10 boolean: expr . GT expr
+   11        | expr . GTEQ expr
+   12        | expr . LT expr
+   13        | expr . LTEQ expr
+   14        | expr . EQUAL expr
+   15        | expr . NOT_EQUAL expr
+
+    PLUS       troca e vai para estado 40
+    SUB        troca e vai para estado 41
+    DIV        troca e vai para estado 42
+    MULT       troca e vai para estado 43
+    MOD        troca e vai para estado 44
+    GT         troca e vai para estado 68
+    GTEQ       troca e vai para estado 69
+    LT         troca e vai para estado 70
+    LTEQ       troca e vai para estado 71
+    EQUAL      troca e vai para estado 72
+    NOT_EQUAL  troca e vai para estado 73
+
+
+Estado 49
+
+   18 boolean: boolean . AND boolean
+   19        | boolean . OR boolean
+   20 comand: IF_CMD PARENTESE1 boolean . PARENTESE2 cmdList
+   21       | IF_CMD PARENTESE1 boolean . PARENTESE2 cmdList ELSE_CMD cmdList
+
+    AND         troca e vai para estado 74
+    OR          troca e vai para estado 75
+    PARENTESE2  troca e vai para estado 76
+
+
+Estado 50
+
+   22 comand: INT_CMD VAR IGUAL . expr PVIRGULA
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 77
+
+
+Estado 51
+
+   31 comand: INT_CMD VAR PARENTESE1 . INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT_CMD  troca e vai para estado 78
+
+
+Estado 52
+
+   24 comand: INT_CMD VAR PVIRGULA .
+
+    $default  redução com regra 24 (comand)
+
+
+Estado 53
+
+   29 comand: INT_CMD MAIN PARENTESE1 . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 79
+
+
+Estado 54
+
+   18 boolean: boolean . AND boolean
+   19        | boolean . OR boolean
+   25 comand: WHILE_CMD PARENTESE1 boolean . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    AND         troca e vai para estado 74
+    OR          troca e vai para estado 75
+    PARENTESE2  troca e vai para estado 80
+
+
+Estado 55
+
+   40 comand: FOR_CMD PARENTESE1 VAR . IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR . IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    IGUAL  troca e vai para estado 81
+
+
+Estado 56
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD . VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD . VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR  troca e vai para estado 82
+
+
+Estado 57
+
+   26 comand: PRINT_INT_CMD PARENTESE1 VAR . PARENTESE2 PVIRGULA
+   27       | PRINT_INT_CMD PARENTESE1 VAR . VIRGULA VAR PARENTESE2 PVIRGULA
+
+    PARENTESE2  troca e vai para estado 83
+    VIRGULA     troca e vai para estado 84
+
+
+Estado 58
+
+   35 comand: PRINT_STR_CMD PARENTESE1 STRING_CMD . PARENTESE2 PVIRGULA
+
+    PARENTESE2  troca e vai para estado 85
+
+
+Estado 59
+
+   30 comand: BOOL VAR PARENTESE1 INT_CMD . VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR  troca e vai para estado 86
+
+
+Estado 60
+
+   28 comand: VAR IGUAL SCAN_INT_CMD PARENTESE1 . PARENTESE2 PVIRGULA
+
+    PARENTESE2  troca e vai para estado 87
+
+
+Estado 61
+
+   23 comand: VAR IGUAL expr PVIRGULA .
+
+    $default  redução com regra 23 (comand)
+
+
+Estado 62
+
+    9 expr: PARENTESE1 expr PARENTESE2 .
+
+    $default  redução com regra 9 (expr)
+
+
+Estado 63
+
+    4 expr: expr . PLUS expr
+    4     | expr PLUS expr .
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 4 (expr)
+
+
+Estado 64
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    5     | expr SUB expr .
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 5 (expr)
+
+
+Estado 65
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    6     | expr DIV expr .
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+
+    MOD  troca e vai para estado 44
+
+    $default  redução com regra 6 (expr)
+
+
+Estado 66
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    7     | expr MULT expr .
+    8     | expr . MOD expr
+
+    MOD  troca e vai para estado 44
+
+    $default  redução com regra 7 (expr)
+
+
+Estado 67
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+    8     | expr MOD expr .
+
+    $default  redução com regra 8 (expr)
+
+
+Estado 68
+
+   10 boolean: expr GT . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 88
+
+
+Estado 69
+
+   11 boolean: expr GTEQ . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 89
+
+
+Estado 70
+
+   12 boolean: expr LT . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 90
+
+
+Estado 71
+
+   13 boolean: expr LTEQ . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 91
+
+
+Estado 72
+
+   14 boolean: expr EQUAL . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 92
+
+
+Estado 73
+
+   15 boolean: expr NOT_EQUAL . expr
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 93
+
+
+Estado 74
+
+   18 boolean: boolean AND . boolean
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 46
+    FALSE       troca e vai para estado 47
+    PARENTESE1  troca e vai para estado 21
+
+    expr     vai para estado 48
+    boolean  vai para estado 94
+
+
+Estado 75
+
+   19 boolean: boolean OR . boolean
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 46
+    FALSE       troca e vai para estado 47
+    PARENTESE1  troca e vai para estado 21
+
+    expr     vai para estado 48
+    boolean  vai para estado 95
+
+
+Estado 76
+
+   20 comand: IF_CMD PARENTESE1 boolean PARENTESE2 . cmdList
+   21       | IF_CMD PARENTESE1 boolean PARENTESE2 . cmdList ELSE_CMD cmdList
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 96
+
+
+Estado 77
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   22 comand: INT_CMD VAR IGUAL expr . PVIRGULA
+
+    PLUS      troca e vai para estado 40
+    SUB       troca e vai para estado 41
+    DIV       troca e vai para estado 42
+    MULT      troca e vai para estado 43
+    MOD       troca e vai para estado 44
+    PVIRGULA  troca e vai para estado 97
+
+
+Estado 78
+
+   31 comand: INT_CMD VAR PARENTESE1 INT_CMD . VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR  troca e vai para estado 98
+
+
+Estado 79
+
+   29 comand: INT_CMD MAIN PARENTESE1 PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 99
+
+
+Estado 80
+
+   25 comand: WHILE_CMD PARENTESE1 boolean PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 100
+
+
+Estado 81
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL . expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL . expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 101
+
+
+Estado 82
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR . IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR . IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    IGUAL  troca e vai para estado 102
+
+
+Estado 83
+
+   26 comand: PRINT_INT_CMD PARENTESE1 VAR PARENTESE2 . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 103
+
+
+Estado 84
+
+   27 comand: PRINT_INT_CMD PARENTESE1 VAR VIRGULA . VAR PARENTESE2 PVIRGULA
+
+    VAR  troca e vai para estado 104
+
+
+Estado 85
+
+   35 comand: PRINT_STR_CMD PARENTESE1 STRING_CMD PARENTESE2 . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 105
+
+
+Estado 86
+
+   30 comand: BOOL VAR PARENTESE1 INT_CMD VAR . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 106
+
+
+Estado 87
+
+   28 comand: VAR IGUAL SCAN_INT_CMD PARENTESE1 PARENTESE2 . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 107
+
+
+Estado 88
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   10 boolean: expr GT expr .
+
+    PLUS  troca e vai para estado 40
+    SUB   troca e vai para estado 41
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 10 (boolean)
+
+
+Estado 89
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   11 boolean: expr GTEQ expr .
+
+    PLUS  troca e vai para estado 40
+    SUB   troca e vai para estado 41
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 11 (boolean)
+
+
+Estado 90
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   12 boolean: expr LT expr .
+
+    PLUS  troca e vai para estado 40
+    SUB   troca e vai para estado 41
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 12 (boolean)
+
+
+Estado 91
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   13 boolean: expr LTEQ expr .
+
+    PLUS  troca e vai para estado 40
+    SUB   troca e vai para estado 41
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 13 (boolean)
+
+
+Estado 92
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   14 boolean: expr EQUAL expr .
+
+    PLUS  troca e vai para estado 40
+    SUB   troca e vai para estado 41
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 14 (boolean)
+
+
+Estado 93
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   15 boolean: expr NOT_EQUAL expr .
+
+    PLUS  troca e vai para estado 40
+    SUB   troca e vai para estado 41
+    DIV   troca e vai para estado 42
+    MULT  troca e vai para estado 43
+    MOD   troca e vai para estado 44
+
+    $default  redução com regra 15 (boolean)
+
+
+Estado 94
+
+   18 boolean: boolean . AND boolean
+   18        | boolean AND boolean .
+   19        | boolean . OR boolean
+
+    $default  redução com regra 18 (boolean)
+
+
+Estado 95
+
+   18 boolean: boolean . AND boolean
+   19        | boolean . OR boolean
+   19        | boolean OR boolean .
+
+    $default  redução com regra 19 (boolean)
+
+
+Estado 96
+
+   20 comand: IF_CMD PARENTESE1 boolean PARENTESE2 cmdList .
+   21       | IF_CMD PARENTESE1 boolean PARENTESE2 cmdList . ELSE_CMD cmdList
+
+    ELSE_CMD  troca e vai para estado 108
+
+    ELSE_CMD  [redução com regra 20 (comand)]
+    $default  redução com regra 20 (comand)
+
+
+Estado 97
+
+   22 comand: INT_CMD VAR IGUAL expr PVIRGULA .
+
+    $default  redução com regra 22 (comand)
+
+
+Estado 98
+
+   31 comand: INT_CMD VAR PARENTESE1 INT_CMD VAR . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 109
+
+
+Estado 99
+
+   29 comand: INT_CMD MAIN PARENTESE1 PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 110
+
+
+Estado 100
+
+   25 comand: WHILE_CMD PARENTESE1 boolean PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 111
+
+
+Estado 101
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr . PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL expr . PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PLUS      troca e vai para estado 40
+    SUB       troca e vai para estado 41
+    DIV       troca e vai para estado 42
+    MULT      troca e vai para estado 43
+    MOD       troca e vai para estado 44
+    PVIRGULA  troca e vai para estado 112
+
+
+Estado 102
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL . expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL . expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    PARENTESE1  troca e vai para estado 21
+
+    expr  vai para estado 113
+
+
+Estado 103
+
+   26 comand: PRINT_INT_CMD PARENTESE1 VAR PARENTESE2 PVIRGULA .
+
+    $default  redução com regra 26 (comand)
+
+
+Estado 104
+
+   27 comand: PRINT_INT_CMD PARENTESE1 VAR VIRGULA VAR . PARENTESE2 PVIRGULA
+
+    PARENTESE2  troca e vai para estado 114
+
+
+Estado 105
+
+   35 comand: PRINT_STR_CMD PARENTESE1 STRING_CMD PARENTESE2 PVIRGULA .
+
+    $default  redução com regra 35 (comand)
+
+
+Estado 106
+
+   30 comand: BOOL VAR PARENTESE1 INT_CMD VAR PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 115
+
+
+Estado 107
+
+   28 comand: VAR IGUAL SCAN_INT_CMD PARENTESE1 PARENTESE2 PVIRGULA .
+
+    $default  redução com regra 28 (comand)
+
+
+Estado 108
+
+   21 comand: IF_CMD PARENTESE1 boolean PARENTESE2 cmdList ELSE_CMD . cmdList
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 116
+
+
+Estado 109
+
+   31 comand: INT_CMD VAR PARENTESE1 INT_CMD VAR PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 117
+
+
+Estado 110
+
+   29 comand: INT_CMD MAIN PARENTESE1 PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 118
+
+
+Estado 111
+
+   25 comand: WHILE_CMD PARENTESE1 boolean PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 119
+
+
+Estado 112
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA . boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA . boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 46
+    FALSE       troca e vai para estado 47
+    PARENTESE1  troca e vai para estado 21
+
+    expr     vai para estado 48
+    boolean  vai para estado 120
+
+
+Estado 113
+
+    4 expr: expr . PLUS expr
+    5     | expr . SUB expr
+    6     | expr . DIV expr
+    7     | expr . MULT expr
+    8     | expr . MOD expr
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr . PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr . PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PLUS      troca e vai para estado 40
+    SUB       troca e vai para estado 41
+    DIV       troca e vai para estado 42
+    MULT      troca e vai para estado 43
+    MOD       troca e vai para estado 44
+    PVIRGULA  troca e vai para estado 121
+
+
+Estado 114
+
+   27 comand: PRINT_INT_CMD PARENTESE1 VAR VIRGULA VAR PARENTESE2 . PVIRGULA
+
+    PVIRGULA  troca e vai para estado 122
+
+
+Estado 115
+
+   30 comand: BOOL VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 123
+
+
+Estado 116
+
+   21 comand: IF_CMD PARENTESE1 boolean PARENTESE2 cmdList ELSE_CMD cmdList .
+
+    $default  redução com regra 21 (comand)
+
+
+Estado 117
+
+   31 comand: INT_CMD VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 124
+
+
+Estado 118
+
+   29 comand: INT_CMD MAIN PARENTESE1 PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 29 (comand)
+
+
+Estado 119
+
+   25 comand: WHILE_CMD PARENTESE1 boolean PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 25 (comand)
+
+
+Estado 120
+
+   18 boolean: boolean . AND boolean
+   19        | boolean . OR boolean
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean . PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean . PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    AND       troca e vai para estado 74
+    OR        troca e vai para estado 75
+    PVIRGULA  troca e vai para estado 125
+
+
+Estado 121
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA . boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA . boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    INT         troca e vai para estado 17
+    VAR         troca e vai para estado 18
+    TRUE        troca e vai para estado 46
+    FALSE       troca e vai para estado 47
+    PARENTESE1  troca e vai para estado 21
+
+    expr     vai para estado 48
+    boolean  vai para estado 126
+
+
+Estado 122
+
+   27 comand: PRINT_INT_CMD PARENTESE1 VAR VIRGULA VAR PARENTESE2 PVIRGULA .
+
+    $default  redução com regra 27 (comand)
+
+
+Estado 123
+
+   30 comand: BOOL VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 127
+
+
+Estado 124
+
+   31 comand: INT_CMD VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 128
+
+
+Estado 125
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA . VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA . VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR  troca e vai para estado 129
+
+
+Estado 126
+
+   18 boolean: boolean . AND boolean
+   19        | boolean . OR boolean
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean . PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean . PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    AND       troca e vai para estado 74
+    OR        troca e vai para estado 75
+    PVIRGULA  troca e vai para estado 130
+
+
+Estado 127
+
+   30 comand: BOOL VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 30 (comand)
+
+
+Estado 128
+
+   31 comand: INT_CMD VAR PARENTESE1 INT_CMD VAR PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 31 (comand)
+
+
+Estado 129
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR . PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   41       | FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR . SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PLUSS  troca e vai para estado 131
+    SUBB   troca e vai para estado 132
+
+
+Estado 130
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA . VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA . VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    VAR  troca e vai para estado 133
+
+
+Estado 131
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 134
+
+
+Estado 132
+
+   41 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 135
+
+
+Estado 133
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR . PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2
+   39       | FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR . SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PLUSS  troca e vai para estado 136
+    SUBB   troca e vai para estado 137
+
+
+Estado 134
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 138
+
+
+Estado 135
+
+   41 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 139
+
+
+Estado 136
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 140
+
+
+Estado 137
+
+   39 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB . PARENTESE2 CHAVETA1 cmdList CHAVETA2
+
+    PARENTESE2  troca e vai para estado 141
+
+
+Estado 138
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 142
+
+
+Estado 139
+
+   41 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 143
+
+
+Estado 140
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 144
+
+
+Estado 141
+
+   39 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 . CHAVETA1 cmdList CHAVETA2
+
+    CHAVETA1  troca e vai para estado 145
+
+
+Estado 142
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 146
+
+
+Estado 143
+
+   41 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 147
+
+
+Estado 144
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 148
+
+
+Estado 145
+
+   39 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 . cmdList CHAVETA2
+
+    BOOL           troca e vai para estado 1
+    VAR            troca e vai para estado 2
+    RETURN         troca e vai para estado 3
+    IF_CMD         troca e vai para estado 4
+    INT_CMD        troca e vai para estado 5
+    WHILE_CMD      troca e vai para estado 6
+    FOR_CMD        troca e vai para estado 7
+    PRINT_INT_CMD  troca e vai para estado 8
+    PRINT_STR_CMD  troca e vai para estado 9
+    CONTINUE_CMD   troca e vai para estado 10
+    BREAK_CMD      troca e vai para estado 11
+
+    comand   vai para estado 13
+    cmdList  vai para estado 149
+
+
+Estado 146
+
+   40 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 40 (comand)
+
+
+Estado 147
+
+   41 comand: FOR_CMD PARENTESE1 VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 41 (comand)
+
+
+Estado 148
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 150
+
+
+Estado 149
+
+   39 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList . CHAVETA2
+
+    CHAVETA2  troca e vai para estado 151
+
+
+Estado 150
+
+   38 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR PLUSS PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 38 (comand)
+
+
+Estado 151
+
+   39 comand: FOR_CMD PARENTESE1 INT_CMD VAR IGUAL expr PVIRGULA boolean PVIRGULA VAR SUBB PARENTESE2 CHAVETA1 cmdList CHAVETA2 .
+
+    $default  redução com regra 39 (comand)

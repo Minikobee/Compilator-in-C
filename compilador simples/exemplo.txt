@@ -1,0 +1,11 @@
+int main() {
+    if(!true )
+        x=0;    
+    return x+1;
+    
+    for(int i =0;i<j;i--){
+        x=1;
+        continue;
+    
+    }
+}

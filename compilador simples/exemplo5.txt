@@ -1,0 +1,8 @@
+int main() {
+ int n;
+ n = scan_int();
+ if (n>0)
+ print_str("prime");
+ else
+ print_str("not prime");
+}

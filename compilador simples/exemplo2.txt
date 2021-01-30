@@ -1,0 +1,5 @@
+int factorial(int n) {
+ if (!true) 
+     continue;
+ return n;
+}
